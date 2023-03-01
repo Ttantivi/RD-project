@@ -1,10 +1,10 @@
-// Homework 1
+// Correction on Observables analysis
 
 set more off
 
 clear all
 
-global directory = "/Users/Desktop/School/Third_Year/zSpring_2019/Econ_104/Homework/Homework_1/"
+global directory = "/Users/Desktop/"
 
 use "${directory} comp_ia_bootstrap4_RCT.dta"
 
@@ -52,7 +52,7 @@ label var treat_real_elligible "Portion of voters elligible in 1998 that were in
 
 gen contact_elligible = contact if age>22&(treat_real==1|treat_real==0)
 
-// Question 1/2
+// part 1/2
 // Creating a balance table
 // Comparing the descriptive statistics of the treatment group vs. the non-treatment group. (call vs no call)
 eststo Control: estpost summarize age female newreg county if treat_real_elligible == 0  
@@ -60,7 +60,7 @@ eststo Treatment: estpost summarize age female newreg county if treat_real_ellig
 eststo Difference: estpost ttest age female newreg county, by(treat_real_elligible) unequal  
 esttab Control Treatment Difference using "${directory}/randomization_voters_check.rtf",  cells("mean(pattern(1 1 0) fmt(3))  b(star pattern(0 0 1) fmt(3)) p(pattern(0 0 1)  fmt(4))") title("Balance Check between groups: Assigned to job phone call vs. no phone call")  label replace plain
 
-// Question 3
+// part 3
 ttest vote02elligiblevote98 == vote98elligible												         // testing if prior is different from previous treatment
 ttest vote02elligiblevote98 == vote98elligible if vote98elligible==0 & treat_real==1                 // testing if prior is different from treatment if they didn't vote in 98 and were treated
 ttest vote02elligiblevote98 == vote98elligible if vote98elligible==0 & treat_real==0                 // same as line above but not treated
@@ -70,7 +70,7 @@ ttest vote02elligiblevote98_treated == vote02elligiblevote98_control, unpaired		
 ttest vote00elligible == vote02elligiblevote98 if vote00elligible==0 & treat_real==1	           	 //  testing if 2000 is different from 2002 for those that didn't vote and were treated
 ttest vote00elligible == vote02elligiblevote98 if vote00elligible==0 & treat_real==0
 
-// Question 4-5
+// part 4-5
 // Creating a table of the regressions below
 reg vote02elligiblevote98 treat_real_elligible
 outreg2 using "${directory}/reg_vote02_on_covariates.xls", replace 

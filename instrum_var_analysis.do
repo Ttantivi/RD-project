@@ -1,12 +1,10 @@
 // Thipbadee Tantivilaisin
-// 1546514 Ttantivi
-// Dr. Dobkin
-// 18 April 2019
-// Homework 1
+// IV Analysis
+
 
 set more off
 clear all
-global directory = "/Users/tim/Desktop/School/Third_Year/zSpring_2019/Econ_104/Homework/Homework_1/"
+global directory = "/Users/tim/Desktop/"
 use "${directory}/comp_ia_bootstrap4_RCT.dta"
 
 // Label all variables with non self-explanatory names
@@ -23,7 +21,7 @@ label var comp_mi "Value of 1 for - competitive district in Michigan (Michigan A
 label var comp_ia "Value of 1 for - competitive district in Iowa (Iowa A in the paper)"
 label var vote98 "Voted 1998"
 
-// Question 1/2
+// part 1/2
 // Creating a balance table
 // Comparing the descriptive statistics of the treatment group vs. the non-treatment group. (call vs no call)
 eststo Control: estpost summarize age female newreg vote98 vote00 if treat_real == 0  
@@ -35,7 +33,7 @@ esttab Control Treatment Difference using "${directory}/balance_check_check_IV.r
 //2. Table 1 suggests that the control group does not provide a good counter factual
 //3. The reason they differ is due to selection bias.
 
-// Question 4
+// part 4
 // Creating a table of the regressions below
 ivregress 2sls vote02 (contact=treat_real)
 outreg2 using "${directory}/reg_vote02_IV.tex", replace title("The Effect of Receiving Voter Mobilization Message on 2002 Voter Turnout Using IV Estimator") 
