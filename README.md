@@ -3,6 +3,8 @@ Analysis on DUI using Regression Discontinuity
 
 This was a research paper I wrote as I was finishing up my undergrad at UC Santa Cruz, in a course under Dr. Carlos Dobkin.
 
+This is a short summary of the work done.
+
 ## Reproducitbility
 The data files have .do (Stata) files have been uploaded in the repo.
 
